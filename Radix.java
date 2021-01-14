@@ -20,17 +20,10 @@ public class Radix{
   }
 
   public static void radixSortSimple(SortableLinkedList data){
-    SortableLinkedList a = new SortableLinkedList();
-    SortableLinkedList b = new SortableLinkedList();
-    SortableLinkedList c = new SortableLinkedList();
-    SortableLinkedList d = new SortableLinkedList();
-    SortableLinkedList e = new SortableLinkedList();
-    SortableLinkedList f = new SortableLinkedList();
-    SortableLinkedList g = new SortableLinkedList();
-    SortableLinkedList h = new SortableLinkedList();
-    SortableLinkedList k = new SortableLinkedList();
-    SortableLinkedList l = new SortableLinkedList();
-    SortableLinkedList[] all = {a,b,c,d,e,f,g,h,k,l};
+    SortableLinkedList[] all = new SortableLinkedList[10];
+    for(int i = 0; i < all.length; i++) {
+      all[i] = new SortableLinkedList();
+    }
     int z = 0;
     for (int i = 0; i<=z;i++){
       for (int j = 0; j<data.size();j++){
@@ -40,7 +33,30 @@ public class Radix{
         int x = nth(data.get(j),i);
         all[x].add(data.get(j));
       }
-      data = new SortableLinkedList();
+      while (data.size()!=0){
+        data.remove(0);
+      }
+      merge(data,all);
+    }
+  }
+
+  private static void radixSortSimpleRev(SortableLinkedList data){
+    SortableLinkedList[] all = new SortableLinkedList[10];
+    for(int i = 0; i < all.length; i++) {
+      all[i] = new SortableLinkedList();
+    }
+    int z = 0;
+    for (int i = 0; i<=z;i++){
+      for (int j = 0; j<data.size();j++){
+        if (i == 0 && length(data.get(j))>z){
+          z=length(data.get(j));
+        }
+        int x = nth(data.get(j),i);
+        all[9-x].add(data.get(j));
+      }
+      while (data.size()!=0){
+        data.remove(0);
+      }
       merge(data,all);
     }
   }
@@ -56,12 +72,12 @@ public class Radix{
         positive.add(data.get(i));
       }
     }
-    radixSortSimple(negative);
+    radixSortSimpleRev(negative);
     radixSortSimple(positive);
-    data = new SortableLinkedList();
-    for (int i = negative.size()-1 ;i>=0;i--){
-      data.add(negative.get(i));
+    while (data.size()!=0){
+      data.remove(0);
     }
+    data.extend(negative);
     data.extend(positive);
   }
 }

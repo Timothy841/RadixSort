@@ -24,17 +24,15 @@ public class Radix{
     for(int i = 0; i < all.length; i++) {
       all[i] = new SortableLinkedList();
     }
-    int z = 0;
-    for (int i = 0; i<=z;i++){
-      for (int j = 0; j<data.size();j++){
-        if (i == 0 && length(data.get(j))>z){
-          z=length(data.get(j));
+    int z = 1;
+    for (int i = 0; i<z;i++){
+      while(data.size()!=0){
+        int a = data.remove(0);
+        if (i == 0 && length(a)>z){
+          z=length(a);
         }
-        int x = nth(data.get(j),i);
-        all[x].add(data.get(j));
-      }
-      while (data.size()!=0){
-        data.remove(0);
+        int x = nth(a,i);
+        all[x].add(a);
       }
       merge(data,all);
     }
@@ -45,17 +43,15 @@ public class Radix{
     for(int i = 0; i < all.length; i++) {
       all[i] = new SortableLinkedList();
     }
-    int z = 0;
-    for (int i = 0; i<=z;i++){
-      for (int j = 0; j<data.size();j++){
-        if (i == 0 && length(data.get(j))>z){
-          z=length(data.get(j));
+    int z = 1;
+    for (int i = 0; i<z;i++){
+      while(data.size()!=0){
+        int a = data.remove(0);
+        if (i == 0 && length(a)>z){
+          z=length(a);
         }
-        int x = nth(data.get(j),i);
-        all[9-x].add(data.get(j));
-      }
-      while (data.size()!=0){
-        data.remove(0);
+        int x = nth(a,i);
+        all[9-x].add(a);
       }
       merge(data,all);
     }
@@ -64,19 +60,17 @@ public class Radix{
   public static void radixSort(SortableLinkedList data){
     SortableLinkedList negative = new SortableLinkedList();
     SortableLinkedList positive = new SortableLinkedList();
-    for (int i = 0; i<data.size();i++){
-      if (data.get(i)<0){
-        negative.add(data.get(i));
+    while (data.size()!=0){
+      int a = data.remove(0);
+      if (a < 0){
+        negative.add(a);
       }
       else{
-        positive.add(data.get(i));
+        positive.add(a);
       }
     }
     radixSortSimpleRev(negative);
     radixSortSimple(positive);
-    while (data.size()!=0){
-      data.remove(0);
-    }
     data.extend(negative);
     data.extend(positive);
   }

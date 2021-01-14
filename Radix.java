@@ -31,8 +31,7 @@ public class Radix{
         if (i == 0 && length(a)>z){
           z=length(a);
         }
-        int x = nth(a,i);
-        all[x].add(a);
+        all[nth(a,i)].add(a);
       }
       merge(data,all);
     }
@@ -50,8 +49,7 @@ public class Radix{
         if (i == 0 && length(a)>z){
           z=length(a);
         }
-        int x = nth(a,i);
-        all[9-x].add(a);
+        all[9-nth(a,i)].add(a);
       }
       merge(data,all);
     }

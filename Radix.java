@@ -58,9 +58,7 @@ public class Radix{
     }
     radixSortSimple(negative);
     radixSortSimple(positive);
-    while(data.size()!=0){
-      data.remove(0);
-    }
+    data = new SortableLinkedList();
     for (int i = negative.size()-1 ;i>=0;i--){
       data.add(negative.get(i));
     }
